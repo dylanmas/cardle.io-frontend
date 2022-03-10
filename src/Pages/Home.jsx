@@ -1,15 +1,14 @@
 import React, {useState} from 'react'
-
-import {motion} from "framer-motion"
+import Background from "../components/Background"
+import TitleCard from "../components/TitleCard"
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <motion.div animate={{
-
-    }
-    } >Home</motion.div>
+    <Background>
+      <TitleCard title={"Cardle.io"}/>
+    </Background>
   )
 }
 
