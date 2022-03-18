@@ -1,0 +1,11 @@
+p{
+    font-size: 1.25rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+p > a{
+    list-style: none;
+    text-decoration: none;
+    color: #9B2F2F;
+}
