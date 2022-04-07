@@ -1,0 +1,15 @@
+.cardHolder{
+    width: 100vw;
+    height: 90vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    justify-content: center;
+}
+
+.card{
+    width: 50px;
+    height: 75px;
+    margin: 0px 5px;
+
+
+}
