@@ -9,14 +9,9 @@ const Play = () => {
   const [time, setTime] = useState("");
   const [stopTime, setStopTime] = useState(true);
   const [cardsArray, setCardsArray] = useState([])
+  const [lives, setLives] = useState(0)
+  const [rcard, setRCard] = useState({})
 
-  const defHandStyle = {
-    maxHeight: "34vh",
-    minHeight: "34vh",
-
-    maxWidth: "100vw",
-    padding: 0,
-  };
 
   useEffect(() => {
     let secs = 0;
@@ -64,6 +59,11 @@ const Play = () => {
     placeCards()
   }, [])
 
+ 
+  const cardClicked = (e) => {
+    console.log(e)
+  }
+
 
 
   const placeCards = () => {
@@ -83,7 +83,7 @@ const Play = () => {
       <TimerCard time={`Time: ${time}`} />
       <div className="cardHolder">
         {cardsArray.map((card, i) => (
-            <Card card={card.type} key={i} className="card"/>
+            <Card card={card.type} key={i} className="card" onClick={cardClicked}/>
         ))}
       </div>
     </Background>
