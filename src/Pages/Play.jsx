@@ -53,22 +53,22 @@ const Play = () => {
   }, []);
 
   useEffect(() => {
-    placeCards();
+    placeCards()
   }, []);
 
   useEffect(() => {
-    if (cardsArray.length > 0) {
-      const {rCard, rIndex } = pickRandomCard();
-      
-    }
-  }, [cardsArray]);
+    setCardsArray(() => [...pickRandomCard()])
+  }, [cardsArray])
+  
+
 
   const pickRandomCard = () => {
-    const rArr = [...cardsArray];
-    const rIndex = Math.floor(Math.random() * rArr.length);
-    const rCard = { ...rArr[rIndex], random: true };
-    rArr[rIndex] = rCard;
-    return {rCard, rIndex}
+    const temp = [...cardsArray];
+    const rIndex = Math.floor(Math.random() * temp.length);
+    const currentCard = temp[rIndex];
+    const rCard = { ...currentCard, random: true };
+    temp[rIndex] = rCard;
+    return temp;
   };
 
   const placeCards = () => {

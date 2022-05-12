@@ -1,14 +1,29 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Background from "../components/Background";
 import TitleCard from "../components/TitleCard";
 import HomepageLogo from "../images/HomepageLogo.png";
 import InputComponent from "../components/InputComponent";
 import Button from "../components/Button";
 import InputForm from "../components/InputForm";
-import LinkTag from "../components/LinkTag"
+import LinkTag from "../components/LinkTag";
+import { loginUrl } from "../backendUrls";
 
 const Login = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [userPassword, setUserPassword] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    axios.post(loginUrl, {
+      email: userEmail,
+      password: userPassword
+    }).then(data => {
+      console.log(data)
+    }).catch(err => {
+      console.log(err.response.data)
+    })
+  };
 
   return (
     <Background>
@@ -18,10 +33,20 @@ const Login = () => {
         style={{ objectFit: "contain", width: "225px", marginTop: "20px" }}
       />
       <InputForm>
-        <InputComponent password={false} placeholder={"Email"} />
-        <InputComponent password={true} placeholder={"Password"} />
+        <InputComponent
+          password={false}
+          placeholder={"Email"}
+          value={userEmail}
+          setValue={setUserEmail}
+        />
+        <InputComponent
+          password={true}
+          placeholder={"Password"}
+          value={userPassword}
+          setValue={setUserPassword}
+        />
         <LinkTag text={"Don't have an account? "} path={"/signup"} />
-        <Button text={"Login"} />
+        <Button onClick={onSubmit} text={"Login"} />
       </InputForm>
     </Background>
   );
