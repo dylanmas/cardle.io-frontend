@@ -19,6 +19,7 @@ const Signup = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     SignupUser(userEmail, userPassword);
+    localStorage.setItem("email", userEmail);
     navigate("/play");
   };
 

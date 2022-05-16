@@ -1,12 +1,32 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
-import {Route, Routes } from "react-router-dom"
+import {Route, Routes, useNavigate } from "react-router-dom"
 
 import {Home, Login, Play, Signup} from "./Pages"
+import {useUser} from "./contexts/UserContext"
+import axios from 'axios'
+import { UserUrl } from './backendUrls'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const {userstuff} = useUser();
+  const [user, setUser] = userstuff;
+  const navigate =  useNavigate();
+
+  useEffect(() => {
+    let key = localStorage.getItem("email");
+    if(key){
+      axios.get(UserUrl(key)).then(res => {
+        setUser(res.data)
+        navigate("/play")
+      }).catch(err => {
+        console.log(err)
+      })
+    }else{
+      navigate("/login")
+    }
+  }, [])
+  
 
   return (
     <div className="App">
