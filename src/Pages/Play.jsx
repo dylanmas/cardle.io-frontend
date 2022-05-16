@@ -98,7 +98,7 @@ const Play = () => {
   return (
     <Background>
       <TimerCard time={`Time: ${time}`} />
-      <div className="cardHolder" onClick={() => setStopTime(!stopTime)}>
+      <div className="cardHolder">
         {cardsArray.map((card, i) => (
           <CardWrapper card={card} key={i} setStopTime={setStopTime} />
         ))}

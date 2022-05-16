@@ -9,15 +9,14 @@ const CardWrapper = ({ card, setStopTime }) => {
 
   useEffect(() => {
     if (card.random) {
-      console.log(card);
+      console.log(card)
     }
   }, []);
 
   const onCardClicked = (e) => {
-    if (card.random) {
-      setStopTime(true);
+    if (card.random === true) {
+      setStopTime(true)
     }
-    RemoveLife();
   };
 
   return (

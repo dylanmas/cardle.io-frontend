@@ -39,6 +39,7 @@ export const UserProvider = (props) => {
     <UserContext.Provider
       value={{
         endpoints: [LoginUser, SignUpUser],
+        userstuff: [user, setUser]
       }}
     >
       {props.children}

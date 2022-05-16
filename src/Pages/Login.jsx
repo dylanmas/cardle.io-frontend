@@ -8,24 +8,19 @@ import Button from "../components/Button";
 import InputForm from "../components/InputForm";
 import LinkTag from "../components/LinkTag";
 import { loginUrl } from "../backendUrls";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../contexts/UserContext";
 
 const Login = () => {
   const [userPassword, setUserPassword] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const navigate = useNavigate();
+  const { endpoints } = useUser();
+  const [LoginUser, SignupUser] = endpoints;
 
   const onSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(loginUrl, {
-        email: userEmail,
-        password: userPassword,
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    
   };
 
   return (
