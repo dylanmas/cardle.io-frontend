@@ -6,26 +6,20 @@ import InputComponent from "../components/InputComponent";
 import Button from "../components/Button";
 import InputForm from "../components/InputForm";
 import LinkTag from "../components/LinkTag";
-import { signupUrl } from "../backendUrls";
-import axios from "axios";
+import { useUser } from "../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [userPassword, setUserPassword] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const { endpoints } = useUser();
+  const [LoginUser, SignupUser] = endpoints;
+  const navigate = useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(signupUrl, {
-        email: userEmail,
-        password: userPassword,
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-      });
+    SignupUser(userEmail, userPassword);
+    navigate("/play");
   };
 
   return (

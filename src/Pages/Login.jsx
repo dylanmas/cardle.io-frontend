@@ -14,15 +14,18 @@ const Login = () => {
   const [userEmail, setUserEmail] = useState("");
 
   const onSubmit = (e) => {
-    e.preventDefault()
-    axios.post(loginUrl, {
-      email: userEmail,
-      password: userPassword
-    }).then(data => {
-      console.log(data)
-    }).catch(err => {
-      console.log(err.response.data)
-    })
+    e.preventDefault();
+    axios
+      .post(loginUrl, {
+        email: userEmail,
+        password: userPassword,
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -45,6 +48,7 @@ const Login = () => {
           value={userPassword}
           setValue={setUserPassword}
         />
+
         <LinkTag text={"Don't have an account? "} path={"/signup"} />
         <Button onClick={onSubmit} text={"Login"} />
       </InputForm>

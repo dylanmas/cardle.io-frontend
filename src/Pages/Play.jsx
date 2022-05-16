@@ -2,68 +2,66 @@ import React, { useEffect, useState } from "react";
 import Background from "../components/Background";
 import TimerCard from "../components/TImerCard";
 import "../styles/play.css";
-import Card from "react-free-playing-cards";
+import CardWrapper from "../components/CardWrapper";
 
 const Play = () => {
   const [time, setTime] = useState("");
-  const [stopTime, setStopTime] = useState(true);
+  const [stopTime, setStopTime] = useState(false);
   const [cardsArray, setCardsArray] = useState([]);
-  const [lives, setLives] = useState(0);
 
   useEffect(() => {
-    let secs = 0;
-    let mins = 0;
-    let hrs = 0;
-
-    let secsStr = 0;
-    let minsStr = 0;
-    let hrsStr = 0;
-
-    let interval = setInterval(() => {
-      secs++;
-      if (secs / 60 === 1) {
-        secs = 0;
-        mins++;
-        if (mins / 60 === 1) {
-          mins = 0;
-          hrs++;
-        }
-      }
-      if (secs < 10) {
-        secsStr = "0" + secs.toString();
-      } else {
-        secsStr = secs;
-      }
-      if (mins < 10) {
-        minsStr = "0" + mins.toString();
-      } else {
-        minsStr = mins;
-      }
-      if (hrs < 10) {
-        hrsStr = "0" + hrs.toString();
-      } else {
-        hrsStr = hrs;
-      }
-
-      setTime(`${hrsStr}:${minsStr}:${secsStr}`);
-    }, 1000);
+    let interval;
     if (stopTime) {
       clearInterval(interval);
+    } else if (stopTime === false) {
+      let secs = 0;
+      let mins = 0;
+      let hrs = 0;
+
+      let secsStr = 0;
+      let minsStr = 0;
+      let hrsStr = 0;
+
+      interval = setInterval(() => {
+        secs++;
+        if (secs / 60 === 1) {
+          secs = 0;
+          mins++;
+          if (mins / 60 === 1) {
+            mins = 0;
+            hrs++;
+          }
+        }
+        if (secs < 10) {
+          secsStr = "0" + secs.toString();
+        } else {
+          secsStr = secs;
+        }
+        if (mins < 10) {
+          minsStr = "0" + mins.toString();
+        } else {
+          minsStr = mins;
+        }
+        if (hrs < 10) {
+          hrsStr = "0" + hrs.toString();
+        } else {
+          hrsStr = hrs;
+        }
+
+        setTime(`${hrsStr}:${minsStr}:${secsStr}`);
+      }, 1000);
     }
-  }, []);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [stopTime]);
 
   useEffect(() => {
-    placeCards()
+    placeCards();
   }, []);
 
-  useEffect(() => {
-    setCardsArray(() => [...pickRandomCard()])
-  }, [cardsArray])
-  
-
-
-  const pickRandomCard = () => {
-    const temp = [...cardsArray];
+  const pickRandomCard = (arr) => {
+    const temp = [...arr];
     const rIndex = Math.floor(Math.random() * temp.length);
     const currentCard = temp[rIndex];
     const rCard = { ...currentCard, random: true };
@@ -94,21 +92,15 @@ const Play = () => {
         temp = [...temp, { type: `${ranks[j]}${suits[i]}` }];
       }
     }
-    setCardsArray(temp);
-  };
-
-  const onCardClicked = (e) => {
-    console.log(e);
+    setCardsArray(pickRandomCard(temp));
   };
 
   return (
     <Background>
       <TimerCard time={`Time: ${time}`} />
-      <div className="cardHolder">
+      <div className="cardHolder" onClick={() => setStopTime(!stopTime)}>
         {cardsArray.map((card, i) => (
-          <div className={`cd ${card.type}`} key={i} onClick={onCardClicked}>
-            <Card card={card.type} key={i} className="card" />
-          </div>
+          <CardWrapper card={card} key={i} setStopTime={setStopTime} />
         ))}
       </div>
     </Background>
