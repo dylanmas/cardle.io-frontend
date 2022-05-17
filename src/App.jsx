@@ -13,6 +13,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("e");
     let key = localStorage.getItem("email");
     if (key) {
       axios
@@ -24,8 +25,9 @@ function App() {
         .catch((err) => {
           console.log(err);
         });
+    } else {
+      navigate("/login");
     }
-    navigate("/login");
   }, []);
 
   return (

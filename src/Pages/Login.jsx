@@ -24,7 +24,7 @@ const Login = () => {
     if (!localStorage.getItem("email")) {
       localStorage.setItem("email", userEmail);
     }
-    navigate("/");
+    navigate("/play");
   };
 
   return (
