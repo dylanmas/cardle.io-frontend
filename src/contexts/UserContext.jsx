@@ -29,6 +29,7 @@ export const UserProvider = (props) => {
       })
       .then((data) => {
         setUser(data.data);
+        success = true;
       })
       .catch((err) => {
         console.log(err.response.data);
@@ -39,7 +40,7 @@ export const UserProvider = (props) => {
     <UserContext.Provider
       value={{
         endpoints: [LoginUser, SignUpUser],
-        userstuff: [user, setUser]
+        userstuff: [user, setUser],
       }}
     >
       {props.children}

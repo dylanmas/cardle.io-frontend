@@ -20,7 +20,11 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    
+    LoginUser(userEmail, userPassword);
+    if (!localStorage.getItem("email")) {
+      localStorage.setItem("email", userEmail);
+    }
+    navigate("/");
   };
 
   return (

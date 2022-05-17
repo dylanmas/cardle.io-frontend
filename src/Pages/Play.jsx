@@ -100,7 +100,12 @@ const Play = () => {
       <TimerCard time={`Time: ${time}`} />
       <div className="cardHolder">
         {cardsArray.map((card, i) => (
-          <CardWrapper card={card} key={i} setStopTime={setStopTime} />
+          <CardWrapper
+            card={card}
+            key={i}
+            time={time}
+            setStopTime={setStopTime}
+          />
         ))}
       </div>
     </Background>
