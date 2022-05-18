@@ -13,19 +13,21 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("e");
     let key = localStorage.getItem("email");
     if (key) {
       axios
         .get(UserUrl(key))
         .then((res) => {
           setUser(res.data);
-          navigate("/play");
+          navigate("/home");
         })
         .catch((err) => {
           console.log(err);
         });
+    } else {
+      navigate("/login");
     }
-    navigate("/login");
   }, []);
 
   return (

@@ -8,6 +8,8 @@ export const UserProvider = (props) => {
   const [user, setUser] = useState({});
 
   const SignUpUser = (email, password) => {
+    let success = false;
+
     axios
       .post(signupUrl, {
         email,
@@ -15,10 +17,12 @@ export const UserProvider = (props) => {
       })
       .then((data) => {
         setUser(data.data);
+        success = true;
       })
       .catch((err) => {
         console.log(err.response.data);
       });
+    return success;
   };
 
   const LoginUser = (email, password) => {
@@ -29,10 +33,9 @@ export const UserProvider = (props) => {
       })
       .then((data) => {
         setUser(data.data);
-        success = true;
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.log(err);
       });
   };
 
