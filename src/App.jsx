@@ -20,7 +20,7 @@ function App() {
         .get(UserUrl(key))
         .then((res) => {
           setUser(res.data);
-          navigate("/play");
+          navigate("/home");
         })
         .catch((err) => {
           console.log(err);
