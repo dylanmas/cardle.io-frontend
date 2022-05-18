@@ -5,6 +5,7 @@ import "../styles/play.css";
 import CardWrapper from "../components/CardWrapper";
 
 const Play = () => {
+  const [lives, setLives] = useState("");
   const [time, setTime] = useState("");
   const [stopTime, setStopTime] = useState(false);
   const [cardsArray, setCardsArray] = useState([]);
@@ -97,13 +98,14 @@ const Play = () => {
 
   return (
     <Background>
-      <TimerCard time={`Time: ${time}`} />
+      <TimerCard time={`Time: ${time}. Lives: ${lives}`} />
       <div className="cardHolder">
         {cardsArray.map((card, i) => (
           <CardWrapper
             card={card}
             key={i}
             time={time}
+            lives={lives}
             setStopTime={setStopTime}
           />
         ))}
