@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import axios from "axios";
-import Background from "../components/Background";
-import TitleCard from "../components/TitleCard";
+
 import HomepageLogo from "../images/HomepageLogo.png";
-import InputComponent from "../components/InputComponent";
-import Button from "../components/Button";
-import InputForm from "../components/InputForm";
-import LinkTag from "../components/LinkTag";
-import { loginUrl } from "../backendUrls";
+import {
+  Background,
+  TitleCard,
+  InputComponent,
+  Button,
+  InputForm,
+  LinkTag,
+} from "../components";
+
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 
@@ -20,11 +22,7 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    LoginUser(userEmail, userPassword);
-    if (!localStorage.getItem("email")) {
-      localStorage.setItem("email", userEmail);
-    }
-    navigate("/play");
+    LoginUser(userEmail, userPassword, navigate);
   };
 
   return (

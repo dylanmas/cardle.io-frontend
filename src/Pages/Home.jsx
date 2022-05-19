@@ -1,15 +1,24 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/home.css";
-import Background from "../components/Background";
-import TitleCard from "../components/TitleCard";
+
 import HomepageLogo from "../images/HomepageLogo.png";
 import HomepageLogo2 from "../images/HomepageLogo2.png";
-import Leaderboard from "../components/Leaderboard";
-import Button from "../components/Button";
+
+import { Background, TitleCard, Leaderboard, Button } from "../components";
+
+import { useUser } from "../contexts/UserContext";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { userstuff } = useUser();
+  const [user, setUser] = userstuff;
+
+  const onLogout = () => {
+    localStorage.removeItem("email");
+    setUser({});
+    navigate("/login");
+  };
 
   return (
     <Background>
@@ -26,6 +35,7 @@ const Home = () => {
         wd={"35%"}
         onClick={() => navigate("/play")}
       />
+      <Button text={"Log out"} mt={"25px"} wd={"35%"} onClick={onLogout} />
     </Background>
   );
 };

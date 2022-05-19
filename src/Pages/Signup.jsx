@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import Background from "../components/Background";
-import TitleCard from "../components/TitleCard";
 import HomepageLogo from "../images/HomepageLogo.png";
-import InputComponent from "../components/InputComponent";
-import Button from "../components/Button";
-import InputForm from "../components/InputForm";
-import LinkTag from "../components/LinkTag";
+import {
+  Background,
+  TitleCard,
+  InputComponent,
+  Button,
+  InputForm,
+  LinkTag,
+} from "../components";
+
 import { useUser } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 
@@ -18,9 +21,7 @@ const Signup = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    SignupUser(userEmail, userPassword);
-    localStorage.setItem("email", userEmail);
-    navigate("/play");
+    SignupUser(userEmail, userPassword, navigate);
   };
 
   return (

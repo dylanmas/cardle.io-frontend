@@ -7,9 +7,7 @@ export const UserContext = createContext();
 export const UserProvider = (props) => {
   const [user, setUser] = useState({});
 
-  const SignUpUser = (email, password) => {
-    let success = false;
-
+  const SignUpUser = (email, password, navigate) => {
     axios
       .post(signupUrl, {
         email,
@@ -17,15 +15,16 @@ export const UserProvider = (props) => {
       })
       .then((data) => {
         setUser(data.data);
-        success = true;
+        localStorage.setItem("email", email);
+        navigate("/home");
       })
       .catch((err) => {
         console.log(err.response.data);
+        navigate("/signup");
       });
-    return success;
   };
 
-  const LoginUser = (email, password) => {
+  const LoginUser = (email, password, navigate) => {
     axios
       .post(loginUrl, {
         email,
@@ -33,9 +32,14 @@ export const UserProvider = (props) => {
       })
       .then((data) => {
         setUser(data.data);
+        if (!localStorage.getItem("email")) {
+          localStorage.setItem("email", data.data.email);
+        }
+        navigate("/home");
       })
       .catch((err) => {
         console.log(err);
+        navigate("/login");
       });
   };
 

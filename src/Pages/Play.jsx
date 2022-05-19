@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Background from "../components/Background";
-import TimerCard from "../components/TImerCard";
 import "../styles/play.css";
-import CardWrapper from "../components/CardWrapper";
+import { Background, TimerCard, CardWrapper } from "../components";
+
+import { useUserStats } from "../contexts/UserStats";
 
 const Play = () => {
-  const [lives, setLives] = useState("");
   const [time, setTime] = useState("");
   const [stopTime, setStopTime] = useState(false);
   const [cardsArray, setCardsArray] = useState([]);
+  const { actions } = useUserStats();
+  let { ResetLives } = actions;
 
   useEffect(() => {
     let interval;
@@ -59,6 +60,7 @@ const Play = () => {
 
   useEffect(() => {
     placeCards();
+    ResetLives();
   }, []);
 
   const pickRandomCard = (arr) => {
@@ -98,14 +100,13 @@ const Play = () => {
 
   return (
     <Background>
-      <TimerCard time={`Time: ${time}. Lives: ${lives}`} />
+      <TimerCard time={`Time: ${time}`} />
       <div className="cardHolder">
         {cardsArray.map((card, i) => (
           <CardWrapper
             card={card}
             key={i}
             time={time}
-            lives={lives}
             setStopTime={setStopTime}
           />
         ))}

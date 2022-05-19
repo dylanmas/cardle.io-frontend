@@ -5,12 +5,13 @@ export const UserStatsContext = createContext();
 export const UserStatsProvider = (props) => {
   const [lives, setLives] = useState(3);
 
-  const RemoveLife = () => {
+  const RemoveLife = (navigate) => {
     if (lives > 0) {
       let val = lives - 1;
       setLives(val);
     } else {
-      return console.log("No lives left");
+      console.log("No lives left");
+      navigate("/home");
     }
   };
 

@@ -1,3 +1,6 @@
+import axios from "axios";
+import { timeUrl } from "../backendUrls";
+
 export const convertToMs = (timeInString) => {
   let milliseconds;
 
@@ -35,4 +38,18 @@ export const msToHMS = (ms) => {
   // 4- Keep only seconds not extracted to minutes:
   seconds = seconds % 60;
   return hours + ":" + minutes + ":" + seconds;
+};
+
+export const PostTime = (email, time) => {
+  axios
+    .post(timeUrl, {
+      email: email,
+      time: convertToMs(time),
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
