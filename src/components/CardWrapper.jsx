@@ -24,7 +24,8 @@ const CardWrapper = ({ card, time, setStopTime }) => {
   const onCardClicked = (e) => {
     if (card.random === true) {
       setStopTime(true);
-      PostTime(user.email, time);
+      PostTime(user.email, time, navigate);
+      navigate("/home");
     } else {
       RemoveLife(navigate);
     }

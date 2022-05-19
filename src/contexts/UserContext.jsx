@@ -38,7 +38,7 @@ export const UserProvider = (props) => {
         navigate("/home");
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
         navigate("/login");
       });
   };

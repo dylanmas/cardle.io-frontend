@@ -40,7 +40,7 @@ export const msToHMS = (ms) => {
   return hours + ":" + minutes + ":" + seconds;
 };
 
-export const PostTime = (email, time) => {
+export const PostTime = (email, time, navigate) => {
   axios
     .post(timeUrl, {
       email: email,
